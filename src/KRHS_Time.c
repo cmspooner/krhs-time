@@ -376,7 +376,11 @@ void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
   text_layer_set_text(period_time_left_layer, period_time_left);
   
   // TODO: Only update the date when it's changed.
+  #ifdef PBL_ROUND
+  strftime(date_text, sizeof(date_text), "%a %e", tick_time);
+  #else
   strftime(date_text, sizeof(date_text), "%a, %b. %e", tick_time);
+  #endif
   text_layer_set_text(text_date_layer, date_text);
   
 
@@ -408,7 +412,7 @@ static void tuple_changed_callback(const uint32_t key, const Tuple* tuple_new, c
   switch (key) {
     case setting_type_of_day:
       if ((value > 0) && (value < type_of_day_count) && (type_of_day != value)) {
-        type_of_day = value+1;
+        type_of_day = value;
         APP_LOG(APP_LOG_LEVEL_DEBUG, "Day Key set to: %d", type_of_day);
         handle_minute_tick(NULL, MINUTE_UNIT);
     }
@@ -437,8 +441,11 @@ void handle_init(void) {
   #endif
 
   Layer *window_layer = window_get_root_layer(window);
-  
-  connection_layer = text_layer_create(GRect(0, 75, 144-8, 34));
+  #ifdef PBL_Round
+    connection_layer = text_layer_create(GRect(100, 75 , 144-8, 34));
+  #else
+    connection_layer = text_layer_create(GRect(0, 75, 144-8, 34));
+  #endif
   #ifdef PBL_COLOR
     if (isConnected){
       text_layer_set_text_color(connection_layer, GColorGreen);
@@ -481,6 +488,9 @@ void handle_init(void) {
   #endif
   text_layer_set_background_color(text_date_layer, GColorClear);
   text_layer_set_font(text_date_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
+  #ifdef PBL_ROUND
+    text_layer_set_text_alignment(text_date_layer, GTextAlignmentCenter);
+  #endif
   layer_add_child(window_layer, text_layer_get_layer(text_date_layer));
 
   GRect line_frame = GRect(8, 27, 144-16, 2);
@@ -496,6 +506,9 @@ void handle_init(void) {
   #endif
   text_layer_set_background_color(text_time_layer, GColorClear);
   text_layer_set_font(text_time_layer, fonts_get_system_font(FONT_KEY_ROBOTO_BOLD_SUBSET_49));
+  #ifdef PBL_ROUND
+    text_layer_set_text_alignment(text_time_layer, GTextAlignmentCenter);
+  #endif
   layer_add_child(window_layer, text_layer_get_layer(text_time_layer));
 
   current_period_layer = text_layer_create(GRect(8, 120, 144-8, 168-68));
@@ -506,6 +519,9 @@ void handle_init(void) {
   #endif
   text_layer_set_background_color(current_period_layer, GColorClear);
   text_layer_set_font(current_period_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
+  #ifdef PBL_ROUND
+    text_layer_set_text_alignment(current_period_layer, GTextAlignmentCenter);
+  #endif
   layer_add_child(window_layer, text_layer_get_layer(current_period_layer));
   
   period_time_left_layer = text_layer_create(GRect(8, 140, 144-8, 168-68));
@@ -520,6 +536,9 @@ void handle_init(void) {
   #endif
   text_layer_set_background_color(period_time_left_layer, GColorClear);
   text_layer_set_font(period_time_left_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
+  #ifdef PBL_ROUND
+    text_layer_set_text_alignment(period_time_left_layer, GTextAlignmentCenter);
+  #endif
   layer_add_child(window_layer, text_layer_get_layer(period_time_left_layer));
     
   Tuplet tuples[] = {

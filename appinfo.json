@@ -15,7 +15,7 @@
                 "file": "images/menu_icon_KTime.png",
                 "menuIcon": true,
                 "name": "IMAGE_MENU_ICON",
-                "type": "png"
+                "type": "bitmap"
             }
         ]
     },
@@ -23,10 +23,11 @@
     "shortName": "KTime",
     "targetPlatforms": [
         "aplite",
-        "basalt"
+        "basalt",
+        "chalk"
     ],
     "uuid": "766a4b80-3382-48fc-a844-c3da2ac662d1",
-    "versionLabel": "2.1",
+    "versionLabel": "2.3",
     "watchapp": {
         "watchface": true
     }
