@@ -441,11 +441,10 @@ void handle_init(void) {
   #endif
 
   Layer *window_layer = window_get_root_layer(window);
-  #ifdef PBL_Round
-    connection_layer = text_layer_create(GRect(100, 75 , 144-8, 34));
-  #else
-    connection_layer = text_layer_create(GRect(0, 75, 144-8, 34));
-  #endif
+  const GRect bounds = layer_get_bounds(window_layer);
+  
+  //connection_layer = text_layer_create(GRect(0, 75, 144-8, 34));
+  connection_layer = text_layer_create(GRect(0, 75, bounds.size.w, 34));
   #ifdef PBL_COLOR
     if (isConnected){
       text_layer_set_text_color(connection_layer, GColorGreen);
@@ -461,7 +460,7 @@ void handle_init(void) {
   handle_bluetooth(bluetooth_connection_service_peek());
   layer_add_child(window_layer, text_layer_get_layer(connection_layer));
 
-  battery_layer = text_layer_create(GRect(0, 95,  144-8, 34));
+  battery_layer = text_layer_create(GRect(0, 95,  bounds.size.w, 34));
   #ifdef PBL_COLOR
     //APP_LOG(APP_LOG_LEVEL_DEBUG, "charged %d", chargePercent);
     if (chargePercent >= 70){
@@ -480,7 +479,7 @@ void handle_init(void) {
   text_layer_set_text(battery_layer, "100% charged");
   layer_add_child(window_layer, text_layer_get_layer(battery_layer));
 
-  text_date_layer = text_layer_create(GRect(8, 0, 144-8, 168-68));
+  text_date_layer = text_layer_create(GRect(8, 0, bounds.size.w-8, 168-68));
   #ifdef PBL_COLOR
      text_layer_set_text_color(text_date_layer, GColorLightGray);
   #else
@@ -493,12 +492,12 @@ void handle_init(void) {
   #endif
   layer_add_child(window_layer, text_layer_get_layer(text_date_layer));
 
-  GRect line_frame = GRect(8, 27, 144-16, 2);
+  GRect line_frame = GRect(8, 27, bounds.size.w, 2);
   line_layer = layer_create(line_frame);
   layer_set_update_proc(line_layer, line_layer_update_callback);
   layer_add_child(window_layer, line_layer);
 
-  text_time_layer = text_layer_create(GRect(7, 20, 144-7, 168-92));
+  text_time_layer = text_layer_create(GRect(7, 20, bounds.size.w-7, 168-92));
   #ifdef PBL_COLOR
      text_layer_set_text_color(text_time_layer, GColorWhite);
   #else
@@ -511,7 +510,7 @@ void handle_init(void) {
   #endif
   layer_add_child(window_layer, text_layer_get_layer(text_time_layer));
 
-  current_period_layer = text_layer_create(GRect(8, 120, 144-8, 168-68));
+  current_period_layer = text_layer_create(GRect(8, 120, bounds.size.w-8, 168-68));
   #ifdef PBL_COLOR
      text_layer_set_text_color(current_period_layer, GColorWhite);
   #else
@@ -524,7 +523,7 @@ void handle_init(void) {
   #endif
   layer_add_child(window_layer, text_layer_get_layer(current_period_layer));
   
-  period_time_left_layer = text_layer_create(GRect(8, 140, 144-8, 168-68));
+  period_time_left_layer = text_layer_create(GRect(8, 140, bounds.size.w-8, 168-68));
   #ifdef PBL_COLOR
     if (nearEnd){
       text_layer_set_text_color(period_time_left_layer, GColorDarkCandyAppleRed);
