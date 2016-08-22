@@ -1,0 +1,40 @@
+{
+    "author": "Chris Spooner",
+    "dependencies": {},
+    "keywords": [],
+    "name": "ktime",
+    "pebble": {
+        "capabilities": [
+            "configurable"
+        ],
+        "displayName": "KRHS Time",
+        "enableMultiJS": false,
+        "messageKeys": {
+            "action": 0,
+            "set_offset": 2,
+            "type_of_day": 1
+        },
+        "projectType": "native",
+        "resources": {
+            "media": [
+                {
+                    "file": "images/menu_icon_KTime.png",
+                    "menuIcon": true,
+                    "name": "IMAGE_MENU_ICON",
+                    "type": "bitmap"
+                }
+            ]
+        },
+        "sdkVersion": "3",
+        "targetPlatforms": [
+            "aplite",
+            "basalt",
+            "chalk"
+        ],
+        "uuid": "766a4b80-3382-48fc-a844-c3da2ac662d1",
+        "watchapp": {
+            "watchface": true
+        }
+    },
+    "version": "2.4.0"
+}

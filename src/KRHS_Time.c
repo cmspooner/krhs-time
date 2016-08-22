@@ -2,14 +2,42 @@
 
 #define DAY_KEY 0
 
-int normal_times[] = {460, 510,             //Per 1
-                      515, 570,             //Per 2
-                      575, 625,             //Per 3
-                      630, 680,             //Per 4
-                      685, 710, 735, 760,   //Per 5
-                      765, 815,             //Per 6
-                      820, 870,             //Per 7
-                      915};                 //Per 8
+int mf_normal_times[] = {460, 505,          //Per 1
+                      509, 557,             //Per 2
+                      561, 606,             //Per 3
+                      610, 655,             //Per 4
+                      659, 681, 707, 733,   //Per 5
+                      737, 782,             //Per 6
+                      786, 831,             //Per 7
+                      835, 875,             //X Block
+                      915};                 //Teacher Time
+int tu_normal_times[] = {460, 518,          //Per 1
+                      522, 582,             //Per 2
+                      586, 626,             //Per 3
+                      630, 670,             //Per 4
+                      674, 696, 722, 748,   //Per 5
+                      752, 792,             //Per 6
+                      796, 836,             //Per 7
+                      840, 875,             //X Block
+                      915};                 //Teacher Time
+int wd_normal_times[] = {460, 500,          //Per 1
+                      504, 546,             //Per 2
+                      550, 608,             //Per 3
+                      612, 670,             //Per 4
+                      659, 681, 707, 733,   //Per 5
+                      737, 782,             //Per 6
+                      786, 831,             //Per 7
+                      835, 875,             //X Block
+                      915};                 //Teacher Time
+int th_normal_times[] = {460, 500,          //Per 1
+                      504, 546,             //Per 2
+                      550, 590,             //Per 3
+                      594, 634,             //Per 4
+                      638, 660, 686, 712,   //Per 5
+                      716, 774,             //Per 6
+                      778, 836,             //Per 7
+                      840, 875,             //X Block
+                      915};                 //Teacher Time
 char *normal_names[] = {"Before School",
                          "Period 1",
                          "Passing Time",
@@ -26,50 +54,24 @@ char *normal_names[] = {"Before School",
                          "Period 6",
                          "Passing Time",
                          "Period 7",
+                         "Passing Time",
+                         "X Block",
                          "Teacher Time"};
-                         
-int pt_times[] = {460, 505,                 //Per 1
-                      510, 555,             //Per 2
-                      560, 605,             //Per 3
+                     
+int ad_times[] = {460, 505,          //Per 1
+                      509, 557,             //Per 2
+                      561, 606,             //Per 3
                       610, 655,             //Per 4
-                      660, 685, 710, 735,   //Per 5
-                      740, 785,             //Per 6
-                      790, 835,             //Per 7
-                      915};                 //Per 8
-char *pt_names[] = {"Before School",
-                         "Period 1",
-                         "Passing Time",
-                         "Period 2",
-                         "Passing Time",
-                         "Period 3",
-                         "Passing Time",
-                         "Period 4",
-                         "Passing Time",
-                         "Period 5,wave 1",
-                         "Period 5,wave 2",
-                         "Period 5,wave 3",
-                         "Passing Time",
-                         "Period 6",
-                         "Passing Time",
-                         "Period 7",
-                         "Prime Time"};
-                         
-int ad_times[] = {460, 505,                 //Per 1
-                      510, 555,             //Per 2
-                      560, 590,             //Advisory        
-                      595, 640,             //Per 3
-                      645, 690,             //Per 4
-                      695, 720, 745, 770,   //Per 5
-                      775, 820,             //Per 6
-                      825, 870,             //Per 7
-                      915};                 //Per 8
+                      659, 681, 707, 733,   //Per 5
+                      737, 782,             //Per 6
+                      786, 831,             //Per 7
+                      835, 875,             //Advisory
+                      915};                 //Teacher Time
 char *ad_names[] = {"Before School",
                          "Period 1",
                          "Passing Time",
                          "Period 2",
                          "Passing Time",
-                         "Advisory",
-                         "Passing Time",
                          "Period 3",
                          "Passing Time",
                          "Period 4",
@@ -81,17 +83,19 @@ char *ad_names[] = {"Before School",
                          "Period 6",
                          "Passing Time",
                          "Period 7",
+                         "Passing Time",
+                         "Advisory",
                          "Teacher Time"};
                          
 int pa_times[] = {460, 500,                 //Per 1
-                      505, 545,             //Per 2
-                      550, 590,             //Per 3
+                      504, 547,             //Per 2
+                      551, 591,             //Per 3
                       595, 635,             //Per 4
-                      640, 680,             //Per 5
-                      685, 710, 735, 760,   //Per 6
-                      765, 805,             //Per 7
-                      810, 870,             //PM Activity
-                      915};                 //Per 8
+                      639, 661, 687, 713,   //Per 5
+                      717, 757,             //Per 6
+                      761, 801,             //Per 7
+                      805, 875,             //PM Activity
+                      915};                 //Teacher Time
 char *pa_names[] = {"Before School",
                          "Period 1",
                          "Passing Time",
@@ -101,23 +105,23 @@ char *pa_names[] = {"Before School",
                          "Passing Time",
                          "Period 4",
                          "Passing Time",
-                         "Period 5",
+                         "Period 5,wave 1",
+                         "Period 5,wave 2",
+                         "Period 5,wave 3",
                          "Passing Time",
-                         "Period 6,wave 1",
-                         "Period 6,wave 2",
-                         "Period 6,wave 3",
+                         "Period 6",
                          "Passing Time",
                          "Period 7",
                          "PM Activity",
                          "Teacher Time"};
                          
-int do_times[] = {580, 610,                 //Per 1
-                      615, 645,             //Per 2
-                      650, 680,             //Per 3
-                      685, 715,             //Per 4
-                      720, 745, 770, 795,   //Per 5
-                      800, 830,             //Per 6
-                      835, 870,             //Per 7
+int do_times[] = {580, 612,                 //Per 1
+                      616, 650,             //Per 2
+                      654, 686,             //Per 3
+                      690, 722,             //Per 4
+                      726, 748, 774, 800,   //Per 5
+                      804, 836,             //Per 6
+                      840, 875,             //Per 7
                       915};                 //Per 8
 char *do_names[] = {"Before School",
                          "Period 1",
@@ -174,7 +178,6 @@ char *ex_names[] = {"Before School",
                          
 enum Settings { setting_type_of_day = 1, setting_offset};
 static enum SettingTypeOfDay { type_of_day_regular = 1, 
-                            type_of_day_prime_time,
                             type_of_day_advisory,
                             type_of_day_pm_activity,
                             type_of_day_delayed_opening,
@@ -278,26 +281,52 @@ void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
   time_min = tick_time->tm_min;
   time_hour = tick_time->tm_hour;
   
-  min_time = time_hour * 60 + time_min + -1;
+  min_time = time_hour * 60 + time_min + set_offset;
   
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Day Key is! %d", type_of_day);
 
+  // TODO: Only update the date when it's changed.
+  #ifdef PBL_ROUND
+  strftime(date_text, sizeof(date_text), "%a %e", tick_time);
+  #else
+  strftime(date_text, sizeof(date_text), "%a, %b. %e", tick_time);
+  #endif
+  text_layer_set_text(text_date_layer, date_text);
+  
   if (type_of_day == type_of_day_regular){
-      for (int i = 0; (unsigned)i < sizeof(normal_times); i++){
-          if (min_time < normal_times[i] && !found){
-              period_text = normal_names[i];
-              minutes_left = normal_times[i] - min_time;
-              found = 1;
-          }
+      if (date_text[0] == 'M' || date_text[0] == 'F'){
+        for (int i = 0; (unsigned)i < sizeof(mf_normal_times); i++){
+            if (min_time < mf_normal_times[i] && !found){
+                period_text = normal_names[i];
+                minutes_left = mf_normal_times[i] - min_time;
+                found = 1;
+            }
+        }
+      } else if (date_text[0] == 'W'){
+        for (int i = 0; (unsigned)i < sizeof(wd_normal_times); i++){
+            if (min_time < wd_normal_times[i] && !found){
+                period_text = normal_names[i];
+                minutes_left = wd_normal_times[i] - min_time;
+                found = 1;
+            }
+        }
+      } else if (date_text[0] == 'T' && date_text[1] == 'u'){
+        for (int i = 0; (unsigned)i < sizeof(tu_normal_times); i++){
+            if (min_time < tu_normal_times[i] && !found){
+                period_text = normal_names[i];
+                minutes_left = tu_normal_times[i] - min_time;
+                found = 1;
+            }
+        }
+      } else if (date_text[0] == 'T' && date_text[1] == 'h'){
+        for (int i = 0; (unsigned)i < sizeof(th_normal_times); i++){
+            if (min_time < th_normal_times[i] && !found){
+                period_text = normal_names[i];
+                minutes_left = th_normal_times[i] - min_time;
+                found = 1;
+            }
+        }
       }
-  } else if (type_of_day == type_of_day_prime_time){
-      for (int i = 0; (unsigned)i < sizeof(pt_times); i++){
-          if (min_time < pt_times[i] && !found){
-              period_text = pt_names[i];
-              minutes_left = pt_times[i] - min_time;
-              found = 1;
-          }
-      } 
   } else if (type_of_day == type_of_day_advisory){
       for (int i = 0; (unsigned)i < sizeof(ad_times); i++){
           if (min_time < ad_times[i] && !found){
