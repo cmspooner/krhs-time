@@ -140,7 +140,36 @@ char *do_names[] = {"Before School",
                          "Passing Time",
                          "Period 7",
                          "Teacher Time"};
-                         
+  
+int assembly_times[] = {460, 505,          //Per 1
+                      509, 557,             //Per 2
+                      561, 606,             //Per 3
+                      610, 650,             //Assembly
+                      654, 676, 702, 728,   //Per 5
+                      732, 777,             //Per 4
+                      781, 826,             //Per 6
+                      830, 875,             //Per 7
+                      915};                 //Teacher Time
+char *assembly_names[] = {"Before School",
+                         "Period 1",
+                         "Passing Time",
+                         "Period 2",
+                         "Passing Time",
+                         "Period 3",
+                         "Passing Time",
+                         "Assembly",
+                         "Passing Time",
+                         "Period 5,wave 1",
+                         "Period 5,wave 2",
+                         "Period 5,wave 3",
+                         "Passing Time",
+                         "Period 4",
+                         "Passing Time",
+                         "Period 6",
+                         "Passing Time",
+                         "Period 7",
+                         "Teacher Time"};
+ 
 int ne_times[] = {465, 565,                 //Per 1
                       570, 580,             //Per 2
                       585, 680,             //Per 3
@@ -181,6 +210,7 @@ static enum SettingTypeOfDay { type_of_day_regular = 1,
                             type_of_day_advisory,
                             type_of_day_pm_activity,
                             type_of_day_delayed_opening,
+                            type_of_day_assembly,
                             type_of_day_necap,
                             type_of_day_exam,
                             type_of_day_count } 
@@ -281,6 +311,7 @@ void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
   time_min = tick_time->tm_min;
   time_hour = tick_time->tm_hour;
   
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Time Offset %d", set_offset);
   min_time = time_hour * 60 + time_min + set_offset;
   
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Day Key is! %d", type_of_day);
@@ -293,7 +324,10 @@ void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
   #endif
   text_layer_set_text(text_date_layer, date_text);
   
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "date_text! %s", date_text);
+  
   if (type_of_day == type_of_day_regular){
+     APP_LOG(APP_LOG_LEVEL_DEBUG, "date_text[0]! %c", date_text[0]);
       if (date_text[0] == 'M' || date_text[0] == 'F'){
         for (int i = 0; (unsigned)i < sizeof(mf_normal_times); i++){
             if (min_time < mf_normal_times[i] && !found){
@@ -348,6 +382,14 @@ void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
           if (min_time < do_times[i] && !found){
               period_text = do_names[i];
               minutes_left = do_times[i] - min_time;
+              found = 1;
+          }
+      } 
+  } else if (type_of_day == type_of_day_assembly){
+      for (int i = 0; (unsigned)i < sizeof(assembly_times); i++){
+          if (min_time < assembly_times[i] && !found){
+              period_text = assembly_names[i];
+              minutes_left = assembly_times[i] - min_time;
               found = 1;
           }
       } 

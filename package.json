@@ -9,11 +9,11 @@
         ],
         "displayName": "KRHS Time",
         "enableMultiJS": false,
-        "messageKeys": {
-            "action": 0,
-            "set_offset": 2,
-            "type_of_day": 1
-        },
+        "messageKeys": [
+            "action",
+            "type_of_day",
+            "set_offset"
+        ],
         "projectType": "native",
         "resources": {
             "media": [
