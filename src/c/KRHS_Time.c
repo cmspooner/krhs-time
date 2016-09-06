@@ -57,7 +57,33 @@ char *normal_names[] = {"Before School",
                          "Passing Time",
                          "X Block",
                          "Teacher Time"};
-                     
+
+int seven_times[] = {460, 510,             //Per 1
+ -                      515, 570,             //Per 2
+ -                      575, 625,             //Per 3
+ -                      630, 680,             //Per 4
+ -                      685, 710, 735, 760,   //Per 5
+ -                      765, 815,             //Per 6
+ -                      820, 870,             //Per 7
+ -                      915};                 //Teacher Time
+char *seven_names[] = {"Before School",
+                         "Period 1",
+                         "Passing Time",
+                         "Period 2",
+                         "Passing Time",
+                         "Period 3",
+                         "Passing Time",
+                         "Period 4",
+                         "Passing Time",
+                         "Period 5,wave 1",
+                         "Period 5,wave 2",
+                         "Period 5,wave 3",
+                         "Passing Time",
+                         "Period 6",
+                         "Passing Time",
+                         "Period 7",
+                         "Teacher Time"};
+
 int ad_times[] = {460, 505,          //Per 1
                       509, 557,             //Per 2
                       561, 606,             //Per 3
@@ -213,6 +239,7 @@ static enum SettingTypeOfDay { type_of_day_regular = 1,
                             type_of_day_assembly,
                             type_of_day_necap,
                             type_of_day_exam,
+                            type_of_day_seven,
                             type_of_day_count } 
                             type_of_day;
 static enum SettingOffset { set_offset_delay = 0, set_offset_count} set_offset;
@@ -408,6 +435,16 @@ void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
           if (min_time < ex_times[i] && !found){
               period_text = ex_names[i];
               minutes_left = ex_times[i] - min_time;
+              found = 1;
+          }
+      } 
+  }
+  
+  else if (type_of_day == type_of_day_seven){
+      for (int i = 0; (unsigned)i < sizeof(seven_times); i++){
+          if (min_time < seven_times[i] && !found){
+              period_text = seven_names[i];
+              minutes_left = seven_times[i] - min_time;
               found = 1;
           }
       } 
