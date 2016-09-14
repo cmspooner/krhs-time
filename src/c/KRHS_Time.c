@@ -24,10 +24,10 @@ int wd_normal_times[] = {460, 500,          //Per 1
                       504, 546,             //Per 2
                       550, 608,             //Per 3
                       612, 670,             //Per 4
-                      659, 681, 707, 733,   //Per 5
-                      737, 782,             //Per 6
-                      786, 831,             //Per 7
-                      835, 875,             //X Block
+                      674, 696, 722, 748,   //Per 5
+                      752, 792,             //Per 6
+                      796, 836,             //Per 7
+                      840, 875,             //X Block
                       915};                 //Teacher Time
 int th_normal_times[] = {460, 500,          //Per 1
                       504, 546,             //Per 2
@@ -66,22 +66,13 @@ int seven_times[] = {460, 510,             //Per 1
  -                      765, 815,             //Per 6
  -                      820, 870,             //Per 7
  -                      915};                 //Teacher Time
-char *seven_names[] = {"Before School",
-                         "Period 1",
-                         "Passing Time",
-                         "Period 2",
-                         "Passing Time",
-                         "Period 3",
-                         "Passing Time",
-                         "Period 4",
-                         "Passing Time",
-                         "Period 5,wave 1",
-                         "Period 5,wave 2",
-                         "Period 5,wave 3",
-                         "Passing Time",
-                         "Period 6",
-                         "Passing Time",
-                         "Period 7",
+char *seven_names[] = {"Before School",  "Period 1",
+                         "Passing Time", "Period 2",
+                         "Passing Time", "Period 3",
+                         "Passing Time", "Period 4",
+                         "Passing Time", "Period 5,wave 1", "Period 5,wave 2", "Period 5,wave 3",
+                         "Passing Time", "Period 6",
+                         "Passing Time", "Period 7",
                          "Teacher Time"};
 
 int ad_times[] = {460, 505,          //Per 1
@@ -328,7 +319,7 @@ void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
 
   char *time_format;
   
-  int found = 0;
+  bool found = false;
 
   if (!tick_time) {
     time_t now = time(NULL);
@@ -428,9 +419,7 @@ void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
               found = 1;
           }
       } 
-  }
-  
-  else if (type_of_day == type_of_day_exam){
+  } else if (type_of_day == type_of_day_exam){
       for (int i = 0; (unsigned)i < sizeof(ex_times); i++){
           if (min_time < ex_times[i] && !found){
               period_text = ex_names[i];
@@ -438,9 +427,7 @@ void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
               found = 1;
           }
       } 
-  }
-  
-  else if (type_of_day == type_of_day_seven){
+  } else if (type_of_day == type_of_day_seven){
       for (int i = 0; (unsigned)i < sizeof(seven_times); i++){
           if (min_time < seven_times[i] && !found){
               period_text = seven_names[i];
